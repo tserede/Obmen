@@ -20,10 +20,15 @@ cur={"RUB": "Российский рубль",
 "CAD":"Канадский доллар",
 "USD":"Американский доллар"
 }
-def update_c_label(event):
-    code=t_combobox.get()
-    name=cur[code]
-    c_label.config(text=name)
+def update_t_label(event):
+    t_code=t_combobox.get()
+    t_name=cur[t_code]
+    t_label.config(text=t_name)
+
+def update_b_label(event):
+    b_code = b_combobox.get()
+    b_name = cur[b_code]
+    b_label.config(text=b_name)
 
 def exchange():
     t_code=t_combobox.get()
@@ -54,16 +59,18 @@ Label(text="Базовая валюта").pack(padx=10,pady=10)
 
 b_combobox=ttk.Combobox(values=list(cur.keys()))
 b_combobox.pack(padx=10,pady=10)
-
+b_combobox.bind("<<ComboboxSelected>>", update_b_label)
+b_label=ttk.Label()
+b_label.pack(padx=10,pady=10)
 
 Label(text="Целевая валюта").pack(padx=10,pady=10)
 
 t_combobox=ttk.Combobox(values=list(cur.keys()))
 t_combobox.pack(padx=10,pady=10)
-t_combobox.bind("<<ComboboxSelected>>", update_c_label)
+t_combobox.bind("<<ComboboxSelected>>", update_t_label)
 
-c_label=ttk.Label()
-c_label.pack(padx=10,pady=10)
+t_label=ttk.Label()
+t_label.pack(padx=10,pady=10)
 
 # entry=Entry()
 # entry.pack(padx=10,pady=10)
